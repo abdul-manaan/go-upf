@@ -165,7 +165,6 @@ func (g *Gtp5g) newFlowDesc(s string) (nl.AttrList, error) {
 }
 
 func convertSlice(ports [][]uint16) []byte {
-	g.log.Warnf("gtp5g convertSlice func")
 	b := make([]byte, len(ports)*4)
 	off := 0
 	for _, p := range ports {
