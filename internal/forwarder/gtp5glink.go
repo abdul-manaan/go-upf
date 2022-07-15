@@ -100,6 +100,7 @@ func OpenGtp5gLink(mux *nl.Mux, addr string, log *logrus.Entry) (*Gtp5gLink, err
 }
 
 func (g *Gtp5gLink) Close() {
+	g.log.Warnf("Close func")
 	if g.f != nil {
 		err := g.f.Close()
 		if err != nil {
@@ -124,6 +125,7 @@ func (g *Gtp5gLink) Close() {
 }
 
 func (g *Gtp5gLink) RouteAdd(dst *net.IPNet) error {
+	g.log.Warnf("RouteAdd func")
 	r := &rtnlroute.Request{
 		Header: rtnlroute.Header{
 			Table:    syscall.RT_TABLE_MAIN,
@@ -144,5 +146,6 @@ func (g *Gtp5gLink) RouteAdd(dst *net.IPNet) error {
 }
 
 func (g *Gtp5gLink) WriteTo(b []byte, addr net.Addr) (int, error) {
+	g.log.Warnf("WriteTo func")
 	return g.conn.WriteTo(b, addr)
 }
