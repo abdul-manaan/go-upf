@@ -84,6 +84,7 @@ func OpenGtp5g(wg *sync.WaitGroup, addr string) (*Gtp5g, error) {
 }
 
 func (g *Gtp5g) Close() {
+	g.log.Warnf("gtp5g close func")
 	if g.conn != nil {
 		g.conn.Close()
 	}
@@ -103,6 +104,7 @@ func (g *Gtp5g) Link() *Gtp5gLink {
 }
 
 func (g *Gtp5g) newFlowDesc(s string) (nl.AttrList, error) {
+	g.log.Warnf("gtp5g newFlowDesc func")
 	var attrs nl.AttrList
 	fd, err := ParseFlowDesc(s)
 	if err != nil {
@@ -163,6 +165,7 @@ func (g *Gtp5g) newFlowDesc(s string) (nl.AttrList, error) {
 }
 
 func convertSlice(ports [][]uint16) []byte {
+	g.log.Warnf("gtp5g convertSlice func")
 	b := make([]byte, len(ports)*4)
 	off := 0
 	for _, p := range ports {
@@ -179,6 +182,7 @@ func convertSlice(ports [][]uint16) []byte {
 }
 
 func (g *Gtp5g) newSdfFilter(i *ie.IE) (nl.AttrList, error) {
+	g.log.Warnf("gtp5g newSdfFilter func")
 	var attrs nl.AttrList
 
 	v, err := i.SDFFilter()
@@ -234,6 +238,7 @@ func (g *Gtp5g) newSdfFilter(i *ie.IE) (nl.AttrList, error) {
 }
 
 func (g *Gtp5g) newPdi(i *ie.IE) (nl.AttrList, error) {
+	g.log.Warnf("gtp5g newPdi func")
 	var attrs nl.AttrList
 
 	ies, err := i.PDI()
@@ -288,6 +293,7 @@ func (g *Gtp5g) newPdi(i *ie.IE) (nl.AttrList, error) {
 }
 
 func (g *Gtp5g) CreatePDR(lSeid uint64, req *ie.IE) error {
+	g.log.Warnf("gtp5g CreatePDR func")
 	var pdrid uint64
 	var attrs []nl.Attr
 
@@ -382,6 +388,7 @@ func (g *Gtp5g) CreatePDR(lSeid uint64, req *ie.IE) error {
 }
 
 func (g *Gtp5g) UpdatePDR(lSeid uint64, req *ie.IE) error {
+	g.log.Warnf("gtp5g UpdatePDR func")
 	var pdrid uint64
 	var attrs []nl.Attr
 
@@ -463,6 +470,7 @@ func (g *Gtp5g) UpdatePDR(lSeid uint64, req *ie.IE) error {
 }
 
 func (g *Gtp5g) RemovePDR(lSeid uint64, req *ie.IE) error {
+	g.log.Warnf("gtp5g RemovePDR func")
 	v, err := req.PDRID()
 	if err != nil {
 		return errors.New("not found PDRID")
@@ -472,6 +480,7 @@ func (g *Gtp5g) RemovePDR(lSeid uint64, req *ie.IE) error {
 }
 
 func (g *Gtp5g) newForwardingParameter(ies []*ie.IE) (nl.AttrList, error) {
+	g.log.Warnf("gtp5g newForwardingParameter func")
 	var attrs nl.AttrList
 
 	for _, x := range ies {
@@ -539,6 +548,7 @@ func (g *Gtp5g) newForwardingParameter(ies []*ie.IE) (nl.AttrList, error) {
 }
 
 func (g *Gtp5g) CreateFAR(lSeid uint64, req *ie.IE) error {
+	g.log.Warnf("gtp5g CreateFAR func")
 	var farid uint64
 	var attrs []nl.Attr
 
@@ -595,6 +605,7 @@ func (g *Gtp5g) CreateFAR(lSeid uint64, req *ie.IE) error {
 }
 
 func (g *Gtp5g) UpdateFAR(lSeid uint64, req *ie.IE) error {
+	g.log.Warnf("gtp5g UpdateFAR func")
 	var farid uint64
 	var attrs []nl.Attr
 
@@ -652,6 +663,7 @@ func (g *Gtp5g) UpdateFAR(lSeid uint64, req *ie.IE) error {
 }
 
 func (g *Gtp5g) RemoveFAR(lSeid uint64, req *ie.IE) error {
+	g.log.Warnf("gtp5g RemoveFAR func")
 	v, err := req.FARID()
 	if err != nil {
 		return errors.New("not found FARID")
@@ -661,6 +673,7 @@ func (g *Gtp5g) RemoveFAR(lSeid uint64, req *ie.IE) error {
 }
 
 func (g *Gtp5g) CreateQER(lSeid uint64, req *ie.IE) error {
+	g.log.Warnf("gtp5g CreateQER func")
 	var qerid uint64
 	var attrs []nl.Attr
 
@@ -797,6 +810,7 @@ func (g *Gtp5g) CreateQER(lSeid uint64, req *ie.IE) error {
 }
 
 func (g *Gtp5g) UpdateQER(lSeid uint64, req *ie.IE) error {
+	g.log.Warnf("gtp5g UpdateQER func")
 	var qerid uint64
 	var attrs []nl.Attr
 
@@ -933,6 +947,7 @@ func (g *Gtp5g) UpdateQER(lSeid uint64, req *ie.IE) error {
 }
 
 func (g *Gtp5g) RemoveQER(lSeid uint64, req *ie.IE) error {
+	g.log.Warnf("gtp5g RemoveQER func")
 	v, err := req.QERID()
 	if err != nil {
 		return errors.New("not found QERID")
@@ -942,6 +957,7 @@ func (g *Gtp5g) RemoveQER(lSeid uint64, req *ie.IE) error {
 }
 
 func (g *Gtp5g) CreateURR(lSeid uint64, req *ie.IE) error {
+	g.log.Warnf("gtp5g CreateURR func")
 	var urrid uint64
 	var attrs []nl.Attr
 
@@ -1003,6 +1019,7 @@ func (g *Gtp5g) CreateURR(lSeid uint64, req *ie.IE) error {
 }
 
 func (g *Gtp5g) UpdateURR(lSeid uint64, req *ie.IE) error {
+	g.log.Warnf("gtp5g UpdateURR func")
 	var urrid uint64
 	var attrs []nl.Attr
 
@@ -1064,6 +1081,7 @@ func (g *Gtp5g) UpdateURR(lSeid uint64, req *ie.IE) error {
 }
 
 func (g *Gtp5g) RemoveURR(lSeid uint64, req *ie.IE) error {
+	g.log.Warnf("gtp5g RemoveURR func")
 	v, err := req.URRID()
 	if err != nil {
 		return errors.New("not found URRID")
@@ -1073,6 +1091,7 @@ func (g *Gtp5g) RemoveURR(lSeid uint64, req *ie.IE) error {
 }
 
 func (g *Gtp5g) CreateBAR(lSeid uint64, req *ie.IE) error {
+	g.log.Warnf("gtp5g CreateBAR func")
 	var barid uint64
 	var attrs []nl.Attr
 
@@ -1115,6 +1134,7 @@ func (g *Gtp5g) CreateBAR(lSeid uint64, req *ie.IE) error {
 }
 
 func (g *Gtp5g) UpdateBAR(lSeid uint64, req *ie.IE) error {
+	g.log.Warnf("gtp5g UpdateBAR func")
 	var barid uint64
 	var attrs []nl.Attr
 
@@ -1157,6 +1177,7 @@ func (g *Gtp5g) UpdateBAR(lSeid uint64, req *ie.IE) error {
 }
 
 func (g *Gtp5g) RemoveBAR(lSeid uint64, req *ie.IE) error {
+	g.log.Warnf("gtp5g RemoveBAR func")
 	v, err := req.BARID()
 	if err != nil {
 		return errors.New("not found BARID")
@@ -1166,10 +1187,12 @@ func (g *Gtp5g) RemoveBAR(lSeid uint64, req *ie.IE) error {
 }
 
 func (g *Gtp5g) HandleReport(handler report.Handler) {
+	g.log.Warnf("gtp5g HandleReport func")
 	g.bs.Handle(handler)
 }
 
 func (g *Gtp5g) applyAction(lSeid uint64, farid int, action uint8) {
+	g.log.Warnf("gtp5g applyAction func")
 	oid := gtp5gnl.OID{lSeid, uint64(farid)}
 	far, err := gtp5gnl.GetFAROID(g.client, g.link.link, oid)
 	if err != nil {
@@ -1225,6 +1248,7 @@ func (g *Gtp5g) applyAction(lSeid uint64, farid int, action uint8) {
 }
 
 func (g *Gtp5g) WritePacket(far *gtp5gnl.FAR, qer *gtp5gnl.QER, pkt []byte) error {
+	g.log.Warnf("gtp5g WritePacket func")
 	if far.Param == nil || far.Param.Creation == nil {
 		return errors.New("far param not found")
 	}
